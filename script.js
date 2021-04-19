@@ -12,7 +12,7 @@ container.addEventListener('click', function () {
   const audio1 = document.getElementById('audio1');
   audio1.src = 'stone.mp3';
   const audioCtx = new AudioContext();
-  // audio1.play();
+  audio1.play();
   audioSource = audioCtx.createMediaElementSource(audio1);
   analyser = audioCtx.createAnalyser();
   audioSource.connect(analyser);
@@ -21,7 +21,7 @@ container.addEventListener('click', function () {
   const bufferLength = analyser.frequencyBinCount;
   const dataArray = new Uint8Array(bufferLength);
 
-  const barWidth = canvas.width / bufferLength;
+  const barWidth = (canvas.width / 2) / bufferLength;
   let barHeight;
   let x;
 
@@ -50,7 +50,7 @@ file.addEventListener('change', function () {
   const bufferLength = analyser.frequencyBinCount;
   const dataArray = new Uint8Array(bufferLength);
 
-  const barWidth = canvas.width / bufferLength;
+  const barWidth = (canvas.width / 2) / bufferLength;
   let barHeight;
   let x;
 
@@ -67,7 +67,21 @@ file.addEventListener('change', function () {
 function drawVisualiser(bufferLength, x, barWidth, barHeight, dataArray) {
   for (let i = 0; i < bufferLength; i++) {
     barHeight = dataArray[i] * 2;
+    const red = i * barHeight / 20;
+    const green = i * 4;
+    const blue = barHeight / 2;
     ctx.fillStyle = 'white';
+    ctx.fillRect(canvas.width / 2 - x, canvas.height - barHeight - 30, barWidth, 20);
+    ctx.fillStyle = 'rgb(' + red + ',' + green + ',' + blue + ')';
+    ctx.fillRect(canvas.width / 2 - x, canvas.height - barHeight, barWidth, barHeight);
+    x += barWidth;
+  }
+  for (let i = 0; i < bufferLength; i++) {
+    barHeight = dataArray[i] * 2;
+    const red = i * barHeight / 20;
+    const green = i * 4;
+    const blue = barHeight / 2;
+    ctx.fillStyle = 'rgb(' + red + ',' + green + ',' + blue + ')';
     ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
     x += barWidth;
   }
