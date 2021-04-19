@@ -30,4 +30,5 @@ container.addEventListener('click', function () {
     analyser.getByteFrequencyData(dataArray);
     requestAnimationFrame(animate);
   }
+  animate();
 });
