@@ -19,4 +19,15 @@ container.addEventListener('click', function () {
   analyser.connect(audioCtx.destination);
   analyser.fftSize = 64;
   const bufferLength = analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufferLength);
+
+  const barWidth = canvas.width / bufferLength;
+  let barHeight;
+  let x = 0;
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    analyser.getByteFrequencyData(dataArray);
+    requestAnimationFrame(animate);
+  }
 });
