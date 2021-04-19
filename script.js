@@ -15,4 +15,8 @@ container.addEventListener('click', function () {
   audio1.play();
   audioSource = audioCtx.createMediaElementSource(audio1);
   analyser = audioCtx.createAnalyser();
-})
+  audioSource.connect(analyser);
+  analyser.connect(audioCtx.destination);
+  analyser.fftSize = 64;
+  const bufferLength = analyser.frequencyBinCount;
+});
