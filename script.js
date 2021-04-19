@@ -18,5 +18,11 @@ const button2 = document.getElementById('button2');
 button2.addEventListener('click', playSound);
 
 function playSound() {
-  audio1.play();
+  const oscillator = audioCtx.createOscillator();
+  oscillator.connect(audioCtx.destination);
+  oscillator.type = 'sawtooth'; // sine, square, triangle
+  oscillator.start();
+  setTimeout(function () {
+    oscillator.stop();
+  }, 1000);
 }
