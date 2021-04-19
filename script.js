@@ -7,7 +7,8 @@ let audioSource;
 let analyser;
 
 container.addEventListener('click', function () {
-  let audio1 = new Audio();
+  // let audio1 = new Audio();
+  const audio1 = document.getElementById('audio1');
   audio1.src = 'stone.mp3';
   const audioCtx = new AudioContext();
   audio1.play();
@@ -21,9 +22,10 @@ container.addEventListener('click', function () {
 
   const barWidth = canvas.width / bufferLength;
   let barHeight;
-  let x = 0;
+  let x;
 
   function animate() {
+    x = 0;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     analyser.getByteFrequencyData(dataArray);
     for (let i = 0; i < bufferLength; i++) {
