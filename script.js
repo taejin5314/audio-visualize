@@ -1,28 +1,12 @@
-const button1 = document.getElementById('button1');
 let audio1 = new Audio();
 audio1.src = 'stone.mp3';
 const audioCtx = new AudioContext();
 console.log(audioCtx);
 
-button1.addEventListener('click', function () {
-  audio1.play();
-  audio1.addEventListener('playing', function () {
-    console.log('Audio 1 started playing!')
-  })
-  audio1.addEventListener('ended', function () {
-    console.log('Audio 1 ended!');
-  })
-})
-
-const button2 = document.getElementById('button2');
-button2.addEventListener('click', playSound);
-
-function playSound() {
-  const oscillator = audioCtx.createOscillator();
-  oscillator.connect(audioCtx.destination);
-  oscillator.type = 'sawtooth'; // sine, square, triangle
-  oscillator.start();
-  setTimeout(function () {
-    oscillator.stop();
-  }, 1000);
-}
+const container = document.getElementById('container');
+const canvas = document.getElementById('canvas1');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const ctx = canvas.getContext('2d');
+let audioSource;
+let analyser;
