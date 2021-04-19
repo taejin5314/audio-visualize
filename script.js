@@ -1,8 +1,3 @@
-let audio1 = new Audio();
-audio1.src = 'stone.mp3';
-const audioCtx = new AudioContext();
-console.log(audioCtx);
-
 const container = document.getElementById('container');
 const canvas = document.getElementById('canvas1');
 canvas.width = window.innerWidth;
@@ -12,6 +7,9 @@ let audioSource;
 let analyser;
 
 container.addEventListener('click', function () {
+  let audio1 = new Audio();
+  audio1.src = 'stone.mp3';
+  const audioCtx = new AudioContext();
   audio1.play();
   audioSource = audioCtx.createMediaElementSource(audio1);
   analyser = audioCtx.createAnalyser();
@@ -28,6 +26,12 @@ container.addEventListener('click', function () {
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     analyser.getByteFrequencyData(dataArray);
+    for (let i = 0; i < bufferLength; i++) {
+      barHeight = dataArray[i];
+      ctx.fillStyle = 'white';
+      ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+      x += barWidth;
+    }
     requestAnimationFrame(animate);
   }
   animate();
