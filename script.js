@@ -12,7 +12,7 @@ container.addEventListener('click', function () {
   const audio1 = document.getElementById('audio1');
   audio1.src = 'stone.mp3';
   const audioCtx = new AudioContext();
-  audio1.play();
+  // audio1.play();
   audioSource = audioCtx.createMediaElementSource(audio1);
   analyser = audioCtx.createAnalyser();
   audioSource.connect(analyser);
